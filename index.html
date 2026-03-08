@@ -9,395 +9,128 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --color-bg: #FAFAF8;
-            --color-dark: #111111;
-            --color-text: #1A1A1A;
-            --color-text-secondary: #6B7280;
-            --color-accent: #FF8B38;
-            --color-accent-dark: #E67A2E;
-            --color-green: #22C55E;
-            --color-blue: #3B82F6;
-            --color-card: #FFFFFF;
-            --color-border: #E5E7EB;
+            --accent: #FF8B38;
+            --accent-dark: #E67A2E;
+            --bg: #FAFAF8;
+            --dark: #111111;
+            --text: #1A1A1A;
+            --text2: #6B7280;
+            --card: #FFFFFF;
+            --border: #E5E7EB;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--color-bg);
-            color: var(--color-text);
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-        }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 
         /* HERO */
-        .hero {
-            background: linear-gradient(160deg, #111111 0%, #1a1a2e 50%, #16213e 100%);
-            color: white;
-            padding: 3rem 1.5rem 4rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 30% 50%, rgba(255,139,56,0.08) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 50%, rgba(59,130,246,0.06) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        .hero-content { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
-
+        .hero { background: linear-gradient(160deg, #111 0%, #1a1a2e 50%, #16213e 100%); color: #fff; padding: 3rem 1.5rem 4rem; text-align: center; position: relative; overflow: hidden; }
+        .hero::before { content: ""; position: absolute; inset: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 30% 50%, rgba(255,139,56,0.08) 0%, transparent 50%), radial-gradient(circle at 70% 50%, rgba(59,130,246,0.06) 0%, transparent 50%); pointer-events: none; }
+        .hero-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
         .hero-flags { font-size: 2rem; margin-bottom: 1rem; }
+        .hero-badge { display: inline-block; background: rgba(255,139,56,0.15); color: var(--accent); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.35rem 1rem; border-radius: 20px; margin-bottom: 1.5rem; }
+        .hero h1 { font-size: 2.5rem; font-weight: 800; line-height: 1.15; margin-bottom: 1rem; letter-spacing: -0.02em; }
+        .hero h1 em { color: var(--accent); font-style: normal; }
+        .hero > .hero-inner > p { font-size: 1.1rem; line-height: 1.6; opacity: 0.75; max-width: 500px; margin: 0 auto 2rem; }
 
-        .hero-badge {
-            display: inline-block;
-            background: rgba(255,139,56,0.15);
-            color: var(--color-accent);
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            padding: 0.35rem 1rem;
-            border-radius: 20px;
-            margin-bottom: 1.5rem;
-        }
+        /* LANG TOGGLE */
+        .lang-toggle { display: inline-flex; background: rgba(255,255,255,0.08); border-radius: 20px; padding: 3px; margin-bottom: 2rem; }
+        .lang-toggle button { background: transparent; color: rgba(255,255,255,0.5); border: none; padding: 0.35rem 1rem; border-radius: 18px; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 500; transition: all 0.2s; }
+        .lang-toggle button.on { background: var(--accent); color: #fff; }
 
-        .hero h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            line-height: 1.15;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
-        }
+        /* WAITLIST BOX */
+        .wl-box { max-width: 480px; margin: 0 auto; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 2rem 1.5rem; backdrop-filter: blur(10px); }
 
-        .hero h1 span { color: var(--color-accent); }
-
-        .hero p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            opacity: 0.75;
-            max-width: 500px;
-            margin: 0 auto 2rem;
-        }
-
-        .lang-toggle {
-            display: inline-flex;
-            background: rgba(255,255,255,0.08);
-            border-radius: 20px;
-            padding: 3px;
-            margin-bottom: 2rem;
-        }
-
-        .lang-btn {
-            background: transparent;
-            color: rgba(255,255,255,0.5);
-            border: none;
-            padding: 0.35rem 1rem;
-            border-radius: 18px;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-
-        .lang-btn.active {
-            background: var(--color-accent);
-            color: white;
-        }
-
-        /* WAITLIST FORM */
-        .waitlist-section {
-            max-width: 480px;
-            margin: 0 auto;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 16px;
-            padding: 2rem 1.5rem;
-            backdrop-filter: blur(10px);
-        }
-
-        /* SCREENSHOTS CAROUSEL */
-        .screenshots {
-            padding: 4rem 1.5rem;
-            background: var(--color-bg);
-            overflow: hidden;
-        }
-
-        .screenshots h2 {
-            text-align: center;
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.02em;
-        }
-
-        .screenshots .subtitle {
-            text-align: center;
-            color: var(--color-text-secondary);
-            margin-bottom: 2.5rem;
-            font-size: 1rem;
-        }
-
-        .screenshots-scroll {
-            display: flex;
-            gap: 1.5rem;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            padding: 0 1rem 1.5rem;
-            scrollbar-width: none;
-            justify-content: center;
-        }
-
-        @media (max-width: 900px) {
-            .screenshots-scroll {
-                justify-content: flex-start;
-            }
-        }
-
-        .screenshots-scroll::-webkit-scrollbar { display: none; }
-
-        .screenshot-item {
-            flex: 0 0 auto;
-            scroll-snap-align: center;
-            text-align: center;
-        }
-
-        .screenshot-item img {
-            width: 220px;
-            height: auto;
-            border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
-        }
-
-        .screenshot-item p {
-            margin-top: 1rem;
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--color-text);
-        }
+        /* SCREENSHOTS */
+        .screenshots { padding: 4rem 1.5rem; }
+        .screenshots h2 { text-align: center; font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+        .screenshots .sub { text-align: center; color: var(--text2); margin-bottom: 2.5rem; }
+        .ss-scroll { display: flex; gap: 1.5rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding: 0 1rem 1.5rem; justify-content: center; scrollbar-width: none; }
+        .ss-scroll::-webkit-scrollbar { display: none; }
+        .ss-item { flex: 0 0 auto; scroll-snap-align: center; text-align: center; }
+        .ss-item img { width: 220px; height: auto; border-radius: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.12); }
+        .ss-item p { margin-top: 1rem; font-weight: 600; font-size: 0.9rem; }
+        @media (max-width: 900px) { .ss-scroll { justify-content: flex-start; } }
 
         /* FEATURES */
-        .features {
-            padding: 4rem 1.5rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .features h2 {
-            text-align: center;
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.02em;
-        }
-
-        .features .subtitle {
-            text-align: center;
-            color: var(--color-text-secondary);
-            margin-bottom: 3rem;
-            font-size: 1rem;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.25rem;
-        }
-
-        .feature-card {
-            background: var(--color-card);
-            border: 1px solid var(--color-border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-        }
-
-        .feature-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-        }
-
-        .feature-card h3 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.4rem;
-        }
-
-        .feature-card p {
-            font-size: 0.88rem;
-            color: var(--color-text-secondary);
-            line-height: 1.5;
-        }
-
-        .badge-premium {
-            display: inline-block;
-            font-size: 0.65rem;
-            font-weight: 600;
-            background: linear-gradient(135deg, #FF8B38, #FF6B1A);
-            color: white;
-            padding: 0.15rem 0.5rem;
-            border-radius: 4px;
-            margin-left: 0.4rem;
-            vertical-align: middle;
-        }
+        .features { padding: 4rem 1.5rem; max-width: 900px; margin: 0 auto; }
+        .features h2 { text-align: center; font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+        .features .sub { text-align: center; color: var(--text2); margin-bottom: 3rem; }
+        .fg { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+        .fc { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; transition: transform 0.2s, box-shadow 0.2s; }
+        .fc:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.06); }
+        .fc-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 1rem; }
+        .fc h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
+        .fc p { font-size: 0.88rem; color: var(--text2); line-height: 1.5; }
+        .premium-tag { display: inline-block; font-size: 0.65rem; font-weight: 600; background: linear-gradient(135deg, #FF8B38, #FF6B1A); color: #fff; padding: 0.15rem 0.5rem; border-radius: 4px; margin-left: 0.4rem; vertical-align: middle; }
 
         /* YOUTUBE */
-        .youtube-section {
-            background: var(--color-dark);
-            color: white;
-            padding: 3.5rem 1.5rem;
-            text-align: center;
-        }
-
-        .youtube-section h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-        }
-
-        .youtube-section p {
-            opacity: 0.6;
-            margin-bottom: 1.5rem;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 1.5rem;
-        }
-
-        .youtube-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: #FF0000;
-            color: white;
-            text-decoration: none;
-            padding: 0.75rem 1.75rem;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: opacity 0.2s;
-        }
-
-        .youtube-btn:hover { opacity: 0.85; }
-
-        .youtube-btn svg { width: 20px; height: 20px; fill: white; }
+        .yt { background: var(--dark); color: #fff; padding: 3.5rem 1.5rem; text-align: center; }
+        .yt h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.75rem; }
+        .yt p { opacity: 0.6; max-width: 500px; margin: 0 auto 1.5rem; }
+        .yt-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: #FF0000; color: #fff; text-decoration: none; padding: 0.75rem 1.75rem; border-radius: 10px; font-weight: 600; font-size: 0.95rem; transition: opacity 0.2s; }
+        .yt-btn:hover { opacity: 0.85; }
+        .yt-btn svg { width: 20px; height: 20px; fill: #fff; }
 
         /* CTA BOTTOM */
-        .cta-bottom {
-            padding: 4rem 1.5rem;
-            text-align: center;
-            max-width: 540px;
-            margin: 0 auto;
-        }
-
-        .cta-bottom h2 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            letter-spacing: -0.02em;
-        }
-
-        .cta-bottom p {
-            color: var(--color-text-secondary);
-            margin-bottom: 2rem;
-        }
+        .cta { padding: 4rem 1.5rem; text-align: center; max-width: 540px; margin: 0 auto; }
+        .cta h2 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.75rem; letter-spacing: -0.02em; }
+        .cta p { color: var(--text2); margin-bottom: 2rem; }
+        .cta-btn { display: inline-block; background: var(--accent); color: #fff; text-decoration: none; padding: 0.85rem 2.5rem; border-radius: 10px; font-weight: 600; font-size: 1rem; transition: background 0.2s; border: none; cursor: pointer; font-family: 'Inter', sans-serif; }
+        .cta-btn:hover { background: var(--accent-dark); }
 
         /* FOOTER */
-        .footer {
-            text-align: center;
-            padding: 2rem 1.5rem;
-            border-top: 1px solid var(--color-border);
-        }
+        .footer { text-align: center; padding: 2rem 1.5rem; border-top: 1px solid var(--border); }
+        .footer p { font-size: 0.8rem; color: var(--text2); }
+        .footer a { color: var(--accent); text-decoration: none; }
+        .fl { margin-top: 0.75rem; display: flex; justify-content: center; gap: 1.5rem; }
+        .fl a { font-size: 0.8rem; color: var(--text2); text-decoration: none; }
+        .fl a:hover { color: var(--accent); }
 
-        .footer p {
-            font-size: 0.8rem;
-            color: var(--color-text-secondary);
-        }
-
-        .footer a {
-            color: var(--color-accent);
-            text-decoration: none;
-        }
-
-        .footer-links {
-            margin-top: 0.75rem;
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-        }
-
-        .footer-links a {
-            font-size: 0.8rem;
-            color: var(--color-text-secondary);
-            text-decoration: none;
-        }
-
-        .footer-links a:hover { color: var(--color-accent); }
-
-        /* LANG CONTENT */
-        .lang-it, .lang-en { display: none; }
-        .lang-it.active, .lang-en.active { display: block; }
-        .lang-it-inline, .lang-en-inline { display: none; }
-        .lang-it-inline.active, .lang-en-inline.active { display: inline; }
+        /* LANG VISIBILITY */
+        [data-lang="it"] { display: inline; }
+        [data-lang="en"] { display: none; }
+        body.en [data-lang="it"] { display: none; }
+        body.en [data-lang="en"] { display: inline; }
+        [data-lang-block="it"] { display: block; }
+        [data-lang-block="en"] { display: none; }
+        body.en [data-lang-block="it"] { display: none; }
+        body.en [data-lang-block="en"] { display: block; }
 
         @media (max-width: 600px) {
             .hero h1 { font-size: 2rem; }
-            .hero p { font-size: 1rem; }
-            .screenshot-item img { width: 180px; }
-            .features-grid { grid-template-columns: 1fr; }
+            .ss-item img { width: 180px; }
+            .fg { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
 <!-- HERO -->
-<div class="hero">
-    <div class="hero-content">
+<div class="hero" id="top">
+    <div class="hero-inner">
         <div class="lang-toggle">
-            <button class="lang-btn active" onclick="switchLang('it')">Italiano</button>
-            <button class="lang-btn" onclick="switchLang('en')">English</button>
+            <button class="on" id="btn-it" onclick="setLang('it')">Italiano</button>
+            <button id="btn-en" onclick="setLang('en')">English</button>
         </div>
 
         <div class="hero-flags">&#127470;&#127481; &#9992;&#65039; &#127464;&#127462;</div>
 
         <div class="hero-badge">
-            <span class="lang-it active">Presto sull'App Store</span>
-            <span class="lang-en">Coming soon to the App Store</span>
+            <span data-lang="it">Presto sull'App Store</span>
+            <span data-lang="en">Coming soon to the App Store</span>
         </div>
 
         <h1>
-            <span class="lang-it active">Emigrare in Canada non e' mai stato cosi' <span>semplice</span></span>
-            <span class="lang-en">Moving to Canada has never been this <span>simple</span></span>
+            <span data-lang="it">Emigrare in Canada non e' mai stato cosi' <em>semplice</em></span>
+            <span data-lang="en">Moving to Canada has never been this <em>simple</em></span>
         </h1>
 
         <p>
-            <span class="lang-it active">Italia2Canada ti guida passo dopo passo nel percorso IEC Working Holiday. Dalla preparazione dei documenti fino ai tuoi primi giorni in Canada.</span>
-            <span class="lang-en">Italia2Canada guides you step by step through the IEC Working Holiday process. From document preparation to your first days in Canada.</span>
+            <span data-lang="it">Italia2Canada ti guida passo dopo passo nel percorso IEC Working Holiday. Dalla preparazione dei documenti fino ai tuoi primi giorni in Canada.</span>
+            <span data-lang="en">Italia2Canada guides you step by step through the IEC Working Holiday process. From document preparation to your first days in Canada.</span>
         </p>
 
-        <div class="lang-it active">
-            <div class="waitlist-section">
+        <div data-lang-block="it">
+            <div class="wl-box">
                 <script
                     src="https://freewaitlists.com/widgets/custom-widget.js"
                     data-waitlist-id="cmmic7tcc005n01pnqd64f0as"
@@ -421,8 +154,8 @@
                 ></script>
             </div>
         </div>
-        <div class="lang-en">
-            <div class="waitlist-section">
+        <div data-lang-block="en">
+            <div class="wl-box">
                 <script
                     src="https://freewaitlists.com/widgets/custom-widget.js"
                     data-waitlist-id="cmmic7tcc005n01pnqd64f0as"
@@ -452,55 +185,37 @@
 <!-- SCREENSHOTS -->
 <div class="screenshots">
     <h2>
-        <span class="lang-it active">Guarda l'app in azione</span>
-        <span class="lang-en">See the app in action</span>
+        <span data-lang="it">Guarda l'app in azione</span>
+        <span data-lang="en">See the app in action</span>
     </h2>
-    <p class="subtitle">
-        <span class="lang-it active">Ogni schermata progettata per rendere il tuo percorso IEC semplice e chiaro</span>
-        <span class="lang-en">Every screen designed to make your IEC journey simple and clear</span>
+    <p class="sub">
+        <span data-lang="it">Ogni schermata progettata per rendere il tuo percorso IEC semplice e chiaro</span>
+        <span data-lang="en">Every screen designed to make your IEC journey simple and clear</span>
     </p>
-    <div class="screenshots-scroll">
-        <div class="screenshot-item">
-            <img src="screenshot-home.png" alt="Home - Dashboard">
-            <p>
-                <span class="lang-it active">Il tuo viaggio inizia qui</span>
-                <span class="lang-en">Your journey starts here</span>
-            </p>
+    <div class="ss-scroll">
+        <div class="ss-item">
+            <img src="screenshot-home.png" alt="Home">
+            <p><span data-lang="it">Il tuo viaggio inizia qui</span><span data-lang="en">Your journey starts here</span></p>
         </div>
-        <div class="screenshot-item">
+        <div class="ss-item">
             <img src="screenshot-checklist.png" alt="Checklist">
-            <p>
-                <span class="lang-it active">Ti guida passo dopo passo</span>
-                <span class="lang-en">Guides you step by step</span>
-            </p>
+            <p><span data-lang="it">Ti guida passo dopo passo</span><span data-lang="en">Guides you step by step</span></p>
         </div>
-        <div class="screenshot-item">
+        <div class="ss-item">
             <img src="screenshot-province.png" alt="Province">
-            <p>
-                <span class="lang-it active">Scopri la provincia perfetta</span>
-                <span class="lang-en">Find your perfect province</span>
-            </p>
+            <p><span data-lang="it">Scopri la provincia perfetta</span><span data-lang="en">Find your perfect province</span></p>
         </div>
-        <div class="screenshot-item">
+        <div class="ss-item">
             <img src="screenshot-news.png" alt="News">
-            <p>
-                <span class="lang-it active">Notizie sempre aggiornate</span>
-                <span class="lang-en">Always up-to-date news</span>
-            </p>
+            <p><span data-lang="it">Notizie sempre aggiornate</span><span data-lang="en">Always up-to-date news</span></p>
         </div>
-        <div class="screenshot-item">
-            <img src="screenshot-salary.png" alt="Salary Calculator">
-            <p>
-                <span class="lang-it active">Quanto guadagnerai?</span>
-                <span class="lang-en">How much will you earn?</span>
-            </p>
+        <div class="ss-item">
+            <img src="screenshot-salary.png" alt="Salary">
+            <p><span data-lang="it">Quanto guadagnerai?</span><span data-lang="en">How much will you earn?</span></p>
         </div>
-        <div class="screenshot-item">
-            <img src="screenshot-budget.png" alt="Budget Simulator">
-            <p>
-                <span class="lang-it active">Pianifica il tuo budget</span>
-                <span class="lang-en">Plan your budget</span>
-            </p>
+        <div class="ss-item">
+            <img src="screenshot-budget.png" alt="Budget">
+            <p><span data-lang="it">Pianifica il tuo budget</span><span data-lang="en">Plan your budget</span></p>
         </div>
     </div>
 </div>
@@ -508,216 +223,110 @@
 <!-- FEATURES -->
 <div class="features">
     <h2>
-        <span class="lang-it active">Tutto in un'unica app</span>
-        <span class="lang-en">Everything in one app</span>
+        <span data-lang="it">Tutto in un'unica app</span>
+        <span data-lang="en">Everything in one app</span>
     </h2>
-    <p class="subtitle">
-        <span class="lang-it active">Niente piu' Google, gruppi Facebook o siti governativi incomprensibili</span>
-        <span class="lang-en">No more Google, Facebook groups or confusing government websites</span>
+    <p class="sub">
+        <span data-lang="it">Niente piu' Google, gruppi Facebook o siti governativi incomprensibili</span>
+        <span data-lang="en">No more Google, Facebook groups or confusing government websites</span>
     </p>
-
-    <div class="features-grid">
-        <div class="feature-card">
-            <div class="feature-icon" style="background: #FFF3E6;">&#9989;</div>
-            <h3>
-                <span class="lang-it active">Checklist interattiva</span>
-                <span class="lang-en">Interactive checklist</span>
-            </h3>
-            <p>
-                <span class="lang-it active">5 fasi, dalla preparazione documenti ai primi giorni in Canada. Con countdown intelligenti per ogni scadenza.</span>
-                <span class="lang-en">5 phases, from document preparation to your first days in Canada. With smart countdowns for every deadline.</span>
-            </p>
+    <div class="fg">
+        <div class="fc">
+            <div class="fc-icon" style="background:#FFF3E6;">&#9989;</div>
+            <h3><span data-lang="it">Checklist interattiva</span><span data-lang="en">Interactive checklist</span></h3>
+            <p><span data-lang="it">5 fasi, dalla preparazione documenti ai primi giorni in Canada. Con countdown intelligenti per ogni scadenza.</span><span data-lang="en">5 phases, from document preparation to your first days in Canada. With smart countdowns for every deadline.</span></p>
         </div>
-
-        <div class="feature-card">
-            <div class="feature-icon" style="background: #E8F5E9;">&#128202;</div>
-            <h3>
-                <span class="lang-it active">Pool IEC in tempo reale</span>
-                <span class="lang-en">Real-time IEC pool</span>
-            </h3>
-            <p>
-                <span class="lang-it active">Dati aggiornati dal sito IRCC: candidati, inviti, posti disponibili e probabilita' di selezione.</span>
-                <span class="lang-en">Data from the IRCC website: candidates, invitations, available spots and selection probability.</span>
-            </p>
+        <div class="fc">
+            <div class="fc-icon" style="background:#E8F5E9;">&#128202;</div>
+            <h3><span data-lang="it">Pool IEC in tempo reale</span><span data-lang="en">Real-time IEC pool</span></h3>
+            <p><span data-lang="it">Dati aggiornati dal sito IRCC: candidati, inviti, posti disponibili e probabilita' di selezione.</span><span data-lang="en">Data from the IRCC website: candidates, invitations, available spots and selection probability.</span></p>
         </div>
-
-        <div class="feature-card">
-            <div class="feature-icon" style="background: #E3F2FD;">&#9992;&#65039;</div>
-            <h3>
-                <span class="lang-it active">Tracking volo</span>
-                <span class="lang-en">Flight tracking</span>
-                <span class="badge-premium">PREMIUM</span>
-            </h3>
-            <p>
-                <span class="lang-it active">Stato in tempo reale, terminal, gate, ritardi e previsioni meteo per la tua destinazione.</span>
-                <span class="lang-en">Real-time status, terminal, gate, delays and weather forecasts for your destination.</span>
-            </p>
+        <div class="fc">
+            <div class="fc-icon" style="background:#E3F2FD;">&#9992;&#65039;</div>
+            <h3><span data-lang="it">Tracking volo</span><span data-lang="en">Flight tracking</span> <span class="premium-tag">PREMIUM</span></h3>
+            <p><span data-lang="it">Stato in tempo reale, terminal, gate, ritardi e previsioni meteo per la tua destinazione.</span><span data-lang="en">Real-time status, terminal, gate, delays and weather forecasts for your destination.</span></p>
         </div>
-
-        <div class="feature-card">
-            <div class="feature-icon" style="background: #F3E5F5;">&#128176;</div>
-            <h3>
-                <span class="lang-it active">Calcolatore stipendio</span>
-                <span class="lang-en">Salary calculator</span>
-                <span class="badge-premium">PREMIUM</span>
-            </h3>
-            <p>
-                <span class="lang-it active">Tutte le 13 province con tasse federali, provinciali, CPP e EI. Scopri il tuo netto.</span>
-                <span class="lang-en">All 13 provinces with federal, provincial taxes, CPP and EI. Find your net pay.</span>
-            </p>
+        <div class="fc">
+            <div class="fc-icon" style="background:#F3E5F5;">&#128176;</div>
+            <h3><span data-lang="it">Calcolatore stipendio</span><span data-lang="en">Salary calculator</span> <span class="premium-tag">PREMIUM</span></h3>
+            <p><span data-lang="it">Tutte le 13 province con tasse federali, provinciali, CPP e EI. Scopri il tuo netto.</span><span data-lang="en">All 13 provinces with federal, provincial taxes, CPP and EI. Find your net pay.</span></p>
         </div>
-
-        <div class="feature-card">
-            <div class="feature-icon" style="background: #FFF8E1;">&#128178;</div>
-            <h3>
-                <span class="lang-it active">Simulatore budget</span>
-                <span class="lang-en">Budget simulator</span>
-                <span class="badge-premium">PREMIUM</span>
-            </h3>
-            <p>
-                <span class="lang-it active">Convertitore EUR/CAD in tempo reale. Pianifica quanto ti serve per vivere in Canada.</span>
-                <span class="lang-en">Real-time EUR/CAD converter. Plan how much you need to live in Canada.</span>
-            </p>
+        <div class="fc">
+            <div class="fc-icon" style="background:#FFF8E1;">&#128178;</div>
+            <h3><span data-lang="it">Simulatore budget</span><span data-lang="en">Budget simulator</span> <span class="premium-tag">PREMIUM</span></h3>
+            <p><span data-lang="it">Convertitore EUR/CAD in tempo reale. Pianifica quanto ti serve per vivere in Canada.</span><span data-lang="en">Real-time EUR/CAD converter. Plan how much you need to live in Canada.</span></p>
         </div>
-
-        <div class="feature-card">
-            <div class="feature-icon" style="background: #E8F5E9;">&#128240;</div>
-            <h3>
-                <span class="lang-it active">Notizie immigrazione</span>
-                <span class="lang-en">Immigration news</span>
-            </h3>
-            <p>
-                <span class="lang-it active">Feed da IRCC, CIC News, Moving2Canada e Immigration.ca. Mai piu' un aggiornamento perso.</span>
-                <span class="lang-en">Feed from IRCC, CIC News, Moving2Canada and Immigration.ca. Never miss an update.</span>
-            </p>
+        <div class="fc">
+            <div class="fc-icon" style="background:#E8F5E9;">&#128240;</div>
+            <h3><span data-lang="it">Notizie immigrazione</span><span data-lang="en">Immigration news</span></h3>
+            <p><span data-lang="it">Feed da IRCC, CIC News, Moving2Canada e Immigration.ca. Mai piu' un aggiornamento perso.</span><span data-lang="en">Feed from IRCC, CIC News, Moving2Canada and Immigration.ca. Never miss an update.</span></p>
         </div>
-
-        <div class="feature-card">
-            <div class="feature-icon" style="background: #FFEBEE;">&#128276;</div>
-            <h3>
-                <span class="lang-it active">Notifiche intelligenti</span>
-                <span class="lang-en">Smart notifications</span>
-            </h3>
-            <p>
-                <span class="lang-it active">10+ tipi di notifiche che si adattano alla tua situazione e alle tue scadenze.</span>
-                <span class="lang-en">10+ notification types that adapt to your situation and deadlines.</span>
-            </p>
+        <div class="fc">
+            <div class="fc-icon" style="background:#FFEBEE;">&#128276;</div>
+            <h3><span data-lang="it">Notifiche intelligenti</span><span data-lang="en">Smart notifications</span></h3>
+            <p><span data-lang="it">10+ tipi di notifiche che si adattano alla tua situazione e alle tue scadenze.</span><span data-lang="en">10+ notification types that adapt to your situation and deadlines.</span></p>
         </div>
-
-        <div class="feature-card">
-            <div class="feature-icon" style="background: #E3F2FD;">&#128196;</div>
-            <h3>
-                <span class="lang-it active">Scansione documenti</span>
-                <span class="lang-en">Document scanning</span>
-                <span class="badge-premium">PREMIUM</span>
-            </h3>
-            <p>
-                <span class="lang-it active">Scansiona e archivia i tuoi documenti IEC. Condividili in un unico PDF.</span>
-                <span class="lang-en">Scan and store your IEC documents. Share them as a single PDF.</span>
-            </p>
+        <div class="fc">
+            <div class="fc-icon" style="background:#E3F2FD;">&#128196;</div>
+            <h3><span data-lang="it">Scansione documenti</span><span data-lang="en">Document scanning</span> <span class="premium-tag">PREMIUM</span></h3>
+            <p><span data-lang="it">Scansiona e archivia i tuoi documenti IEC. Condividili in un unico PDF.</span><span data-lang="en">Scan and store your IEC documents. Share them as a single PDF.</span></p>
         </div>
     </div>
 </div>
 
 <!-- YOUTUBE -->
-<div class="youtube-section">
+<div class="yt">
     <h2>
-        <span class="lang-it active">Segui il canale YouTube</span>
-        <span class="lang-en">Follow on YouTube</span>
+        <span data-lang="it">Segui il canale YouTube</span>
+        <span data-lang="en">Follow on YouTube</span>
     </h2>
     <p>
-        <span class="lang-it active">Guide, vlog e consigli pratici da chi ha gia' vissuto l'esperienza IEC in Canada.</span>
-        <span class="lang-en">Guides, vlogs and practical tips from someone who's already been through the IEC experience in Canada.</span>
+        <span data-lang="it">Guide, vlog e consigli pratici da chi ha gia' vissuto l'esperienza IEC in Canada.</span>
+        <span data-lang="en">Guides, vlogs and practical tips from someone who's already been through the IEC experience in Canada.</span>
     </p>
-    <a href="https://www.youtube.com/@TheKompass61" target="_blank" rel="noopener" class="youtube-btn">
+    <a href="https://www.youtube.com/@TheKompass61" target="_blank" rel="noopener" class="yt-btn">
         <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
         The Kompass
     </a>
 </div>
 
 <!-- CTA BOTTOM -->
-<div class="cta-bottom">
+<div class="cta">
     <h2>
-        <span class="lang-it active">Pronto a partire?</span>
-        <span class="lang-en">Ready to go?</span>
+        <span data-lang="it">Pronto a partire?</span>
+        <span data-lang="en">Ready to go?</span>
     </h2>
     <p>
-        <span class="lang-it active">Iscriviti alla waitlist e prova la beta gratuitamente. Il Canada ti aspetta.</span>
-        <span class="lang-en">Join the waitlist and try the beta for free. Canada is waiting for you.</span>
+        <span data-lang="it">Iscriviti alla waitlist e prova la beta gratuitamente. Il Canada ti aspetta.</span>
+        <span data-lang="en">Join the waitlist and try the beta for free. Canada is waiting for you.</span>
     </p>
-    <div class="lang-it active">
-        <div class="waitlist-section" style="background: rgba(0,0,0,0.02); border: 1px solid var(--color-border);">
-            <script
-                src="https://freewaitlists.com/widgets/custom-widget.js"
-                data-waitlist-id="cmmic7tcc005n01pnqd64f0as"
-                data-variant="custom"
-                data-title=""
-                data-success-title="Ci sei! Scarica subito la beta"
-                data-success-description="Grazie! Scarica la beta su TestFlight: https://testflight.apple.com/join/m6DsQNQM"
-                data-button-text="Iscriviti alla waitlist"
-                data-input-placeholder="Inserisci la tua email"
-                data-button-color="#FF8B38"
-                data-background-color="#FFFFFF"
-                data-font-color="#111827"
-                data-border-color="#d1d5db"
-                data-button-font-color="#FFFFFF"
-                data-border-radius="8"
-                data-font-size-title="20"
-                data-font-size-body="14"
-                data-background-opacity="1"
-                data-custom-fields='[{"id":"field-1773009797935-0.7917494040760681","name":"email","type":"email","label":"Email","required":true,"placeholder":"Inserisci la tua email"}]'
-                defer
-            ></script>
-        </div>
-    </div>
-    <div class="lang-en">
-        <div class="waitlist-section" style="background: rgba(0,0,0,0.02); border: 1px solid var(--color-border);">
-            <script
-                src="https://freewaitlists.com/widgets/custom-widget.js"
-                data-waitlist-id="cmmic7tcc005n01pnqd64f0as"
-                data-variant="custom"
-                data-title=""
-                data-success-title="You're in! Download the beta now"
-                data-success-description="Thanks! Download the beta on TestFlight: https://testflight.apple.com/join/m6DsQNQM"
-                data-button-text="Join the waitlist"
-                data-input-placeholder="Enter your email"
-                data-button-color="#FF8B38"
-                data-background-color="#FFFFFF"
-                data-font-color="#111827"
-                data-border-color="#d1d5db"
-                data-button-font-color="#FFFFFF"
-                data-border-radius="8"
-                data-font-size-title="20"
-                data-font-size-body="14"
-                data-background-opacity="1"
-                data-custom-fields='[{"id":"field-1773009797935-0.7917494040760681","name":"email","type":"email","label":"Email","required":true,"placeholder":"Enter your email"}]'
-                defer
-            ></script>
-        </div>
-    </div>
+    <a href="#top" class="cta-btn">
+        <span data-lang="it">Iscriviti alla waitlist</span>
+        <span data-lang="en">Join the waitlist</span>
+    </a>
 </div>
 
 <!-- FOOTER -->
 <div class="footer">
-    <p>Italia2Canada &mdash; &copy; 2026 Pietro Trentini</p>
-    <div class="footer-links">
+    <p>Italia2Canada &mdash; &#169; 2026 Pietro Trentini</p>
+    <div class="fl">
         <a href="https://kompass95.github.io/privacy-policy/">Privacy Policy</a>
         <a href="https://kompass95.github.io/privacy-policy/support.html">Support</a>
-        <a href="/cdn-cgi/l/email-protection#97e7fef2e3e5f8e3e5f2f9e3fef9feb9f3f2e1d7f0faf6fefbb9f4f8fa">Contact</a>
+        <a href="mailto:pietrotrentini.dev@gmail.com">Contact</a>
     </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    function switchLang(lang) {
-        document.querySelectorAll('.lang-it, .lang-en').forEach(function(el) {
-            el.classList.remove('active');
-        });
-        document.querySelectorAll('.lang-' + lang).forEach(function(el) {
-            el.classList.add('active');
-        });
-        document.querySelectorAll('.lang-btn').forEach(function(el) {
-            el.classList.remove('active');
-        });
-        var buttons = document.querySelectorAll('.lang-btn');
-        for (var i = 0; i < buttons.length; i++) {
-            if (buttons[i].textContent.trim(
+<script>
+function setLang(lang) {
+    if (lang === 'en') {
+        document.body.classList.add('en');
+    } else {
+        document.body.classList.remove('en');
+    }
+    document.getElementById('btn-it').className = lang === 'it' ? 'on' : '';
+    document.getElementById('btn-en').className = lang === 'en' ? 'on' : '';
+}
+</script>
+
+</body>
+</html>
